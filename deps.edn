@@ -1,0 +1,26 @@
+{:paths ["src" "classes"]
+ :deps  {org.clojure/clojure {:mvn/version "1.11.1"}
+         environ/environ     {:mvn/version "1.2.0"}
+         clj-time/clj-time   {:mvn/version "0.15.2"}
+         cheshire/cheshire   {:mvn/version "5.11.0"}}
+ :aliases
+ {:lint     {:extra-deps {com.jameslaverack/cljfmt-runner
+                          {:git/url "https://github.com/JamesLaverack/cljfmt-runner.git"
+                           :sha     "97960e9a6464935534b5a6bab529e063d0027128"}}
+             :main-opts  ["-m" "cljfmt-runner.check"]}
+  :lint-fix {:extra-deps {com.jameslaverack/cljfmt-runner
+                          {:git/url "https://github.com/JamesLaverack/cljfmt-runner.git"
+                           :sha     "97960e9a6464935534b5a6bab529e063d0027128"}}
+             :main-opts  ["-m" "cljfmt-runner.fix"]}
+  :pack     {:replace-deps {pack/pack.alpha {:git/url "https://github.com/juxt/pack.alpha.git"
+                                             :sha     "042c61410b1851957ae5f77cfe26a255837172cc"}}
+             :main-opts    ["-m"]}
+  :test     {:extra-paths ["test"]
+             :extra-deps  {nubank/matcher-combinators {:mvn/version "3.7.2"}
+                           com.cognitect/test-runner  {:git/url "https://github.com/cognitect-labs/test-runner.git"
+                                                       :sha     "7284cda41fb9edc0f3bc6b6185cfb7138fc8a023"}}
+             :main-opts   ["--report" "stderr"
+                           "-m" "cognitect.test-runner"]}
+  :repl     {:extra-paths ["dev"]
+             :extra-deps  {nubank/matcher-combinators {:mvn/version "3.7.2"}}
+             :main-opts   ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/src/dev.clj\"))"]}}}
